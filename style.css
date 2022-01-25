@@ -32,7 +32,7 @@ a, .form-submit-button {
 }
 
 header {
-    background-color: #ff8000;
+    background-color: #001453;
     min-height: 50vh;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@ header {
 }
 .input-forms-parent {
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: row wrap;
     justify-content: center;
     padding: 50px;
     background-color: #ffffff;
@@ -62,7 +62,7 @@ header {
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     gap: 30px;
 }
 
@@ -70,7 +70,7 @@ form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* gap: 30px; */
+    gap: 30px;
 }
 
 form input {
@@ -121,7 +121,7 @@ footer div {
     color: #bdbdbd;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     html {
         font-size: 2vw;
     }
@@ -131,5 +131,8 @@ footer div {
 
     h2 {
         font-size: 5rem;
+    }
+    .input-forms-parent {
+        flex-direction: column;
     }
 }
