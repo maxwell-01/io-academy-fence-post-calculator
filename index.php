@@ -1,7 +1,6 @@
 <?php
+
 function fenceLength($posts, $railings) {
-  // $posts = intval($posts);
-  // $railings = intval($railings);
   if (($posts < 2) || ($railings < 1)) {
     return 0;
   }
@@ -10,17 +9,18 @@ function fenceLength($posts, $railings) {
     }
     $remaining_posts = $posts - 2;
     $remaining_railings = $railings - 1;
+
     $remaining_lengths = min($remaining_posts, $remaining_railings);
+
     $remaining_fence = 1.6 * $remaining_lengths;
     $total_fence_length = 1.7 + $remaining_fence;
+
     $rounded_total = number_format((float)$total_fence_length, 2, '.', '');
     return $rounded_total;
     
 }
 
 function required_fence_equipment($length){
-  //returns array = [posts, railings]
-  // $length = intval($length);
   if ($length < 1.7) {
     return ["posts_required" => 0, "railings_required" => 0];
   }
@@ -34,50 +34,100 @@ function required_fence_equipment($length){
   return ["posts_required" => $posts_required, "railings_required" => $railings_required];
 }
 
-echo fenceLength(92,91);
-echo "\n";
-print_r(required_fence_equipment(145.7));
-echo "\n";
+if (isset($_POST["fence_length_input"])) {
+    $returned_equipment = required_fence_equipment($_POST["fence_length_input"]);
+    $posts_required = $returned_equipment["posts_required"];
+    $railings_required = $returned_equipment["railings_required"];
+}
 
-/*
-
-
-
-
-1 length of fence is 2 posts, 1 railing
-
-each additional lenth of fence is 1 more railing and 1 more post
-
-post = 0.1m wide
-railing = 1.5m wide
-
-therefore one length = 1.7m
-each additional length = 1.6m more
-
-so number of posts must always be 1 more than number of railings
-
-so minus off 2 posts and 1 railing, then the remaining length is the smaller of the two remaining numbers x 1.6
-
-
-if posts >= 2 AND railings >= 1 then we have a length
-check this first
-else return "not enough materials to make a fence"
-
-if posts == 2 AND railings == 1 then length is 1.7m
-
-else
-remaining posts = posts - 2
-remaining railings = railings -1
-(add numbers to an array) use min to find smallest number
-remaining length = smallest number x 1.6
-
-total length = initial length + remianing length
-
-if length less than 1.7m than 0
-if 1.7m than 2 posts and 1 railing
-for each extra 1.6m its an extra railing and and an extra post
-therefore its the remaining length /1.6, rounded down number of railings and posts
-
-*/
+if (isset($_POST["posts_available_input"])) {
+    $returned_length = fenceLength($_POST["posts_available_input"], $_POST["railings_available_input"]);
+}
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <title>Fence Post Challenge</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header>
+
+    <h1>Fencing assistant</h1>
+    <p>Not <i>that</i> kind of fencing</p>
+
+</header>
+
+<main>
+    <section class="input-forms-section">
+        <div class="input-forms-parent">
+            <form method="post">
+                <h2>Calculate required supplies</h2>
+                <p>Instructions here</p>
+                <div class="side-by-side-label-input">
+                    <label for="fence_length_input">Fence length:</label>
+                    <input type="number" id="fence_length_input" name="fence_length_input">
+                </div>
+                <input class="form-submit-button" type="submit" value="Calculate">
+                <a href="index.php">Reset</a>
+            </form>
+
+            <form method="post">
+                <h2>Calculate fence length</h2>
+                <p>Instructions here</p>
+                <div class="side-by-side-label-input">
+                    <label for="posts_available_input">Posts available:</label>
+                    <input type="number" id="posts_available_input" name="posts_available_input">
+                </div>
+                <div class="side-by-side-label-input">
+                    <label for="railings_available_input">Railings available:</label>
+                    <input type="number" id="railings_available_input" name="railings_available_input">
+                </div>
+                <input class="form-submit-button" type="submit" value="Calculate">
+                <a href="index.php">Reset</a>
+            </form>
+        </div>
+    </section>
+    <section>
+        <p>
+            <?php
+            if (isset($_POST["fence_length_input"])) {
+                echo "$_POST[fence_length_input]m of fence will require $posts_required posts and $railings_required railings.";
+            }
+
+            if (isset($_POST["posts_available_input"])) {
+                echo "$_POST[posts_available_input] posts and $_POST[railings_available_input] railings will produce $returned_length m length of fencing.";
+            }
+            ?>
+        </p>
+    </section>
+</main>
+
+<footer>
+    <div>
+        <div class="footer-item">
+            <a href="https://www.instagram.com/thehopefulhitchhikers/?hl=en" target="_blank">Instagram</a>
+        </div>
+
+        <div class="footer-item">
+            <a href="https://www.linkedin.com/in/maxwellnewton/" target="_blank">LinkedIn</a>
+        </div>
+
+        <div class="footer-item">
+            <a href="https://github.com/maxwell-01" target="_blank">GitHub</a>
+        </div>
+    </div>
+
+</footer>
+
+</body>
+
+</html>
