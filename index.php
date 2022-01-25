@@ -56,6 +56,7 @@ if (isset($_POST["posts_available_input"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/jpg" href="favicon.ico"/>
 </head>
 
 <body>
@@ -69,18 +70,18 @@ if (isset($_POST["posts_available_input"])) {
 <main>
     <section class="input-forms-section">
         <div class="input-forms-parent">
-            <form method="post">
+            <form method="post" action="#answer-section">
                 <h2>Calculate required supplies</h2>
                 <p>Instructions here</p>
                 <div class="side-by-side-label-input">
-                    <label for="fence_length_input">Fence length:</label>
+                    <label for="fence_length_input">Fence length (m):</label>
                     <input type="number" id="fence_length_input" name="fence_length_input">
                 </div>
                 <input class="form-submit-button" type="submit" value="Calculate">
                 <a href="index.php">Reset</a>
             </form>
 
-            <form method="post">
+            <form method="post" action="#answer-section">
                 <h2>Calculate fence length</h2>
                 <p>Instructions here</p>
                 <div class="side-by-side-label-input">
@@ -96,7 +97,7 @@ if (isset($_POST["posts_available_input"])) {
             </form>
         </div>
     </section>
-    <section>
+    <section id="answer-section" class="answer-section">
         <p>
             <?php
             if (isset($_POST["fence_length_input"])) {
@@ -104,7 +105,7 @@ if (isset($_POST["posts_available_input"])) {
             }
 
             if (isset($_POST["posts_available_input"])) {
-                echo "$_POST[posts_available_input] posts and $_POST[railings_available_input] railings will produce $returned_length m length of fencing.";
+                echo "$_POST[posts_available_input] posts and $_POST[railings_available_input] railings can produce $returned_length"."m length of fencing.";
             }
             ?>
         </p>

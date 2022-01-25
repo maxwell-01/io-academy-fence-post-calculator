@@ -95,6 +95,11 @@ form input {
     border-color: #ff8000;
 }
 
+.answer-section {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
 
 footer {
     background-color: #ffffff;
