@@ -72,26 +72,32 @@ if (isset($_POST["posts_available_input"])) {
         <div class="input-forms-parent">
             <form method="post" action="#answer-section">
                 <h2>Calculate required supplies</h2>
-                <p>Instructions here</p>
-                <div class="side-by-side-label-input">
-                    <label for="fence_length_input">Fence length (m):</label>
-                    <input type="number" id="fence_length_input" name="fence_length_input">
+                <p>Enter the length of fence you would like to build and system will calculate how many posts and railings you require.</p>
+                <div class="form-input-section">
+                    <div class="side-by-side-label-input">
+                        <label for="fence_length_input">Fence length (m):</label>
+                        <input type="number" id="fence_length_input" name="fence_length_input">
+                    </div>
                 </div>
+
                 <input class="form-submit-button" type="submit" value="Calculate">
                 <a href="index.php">Reset</a>
             </form>
 
             <form method="post" action="#answer-section">
                 <h2>Calculate fence length</h2>
-                <p>Instructions here</p>
-                <div class="side-by-side-label-input">
-                    <label for="posts_available_input">Posts available:</label>
-                    <input type="number" id="posts_available_input" name="posts_available_input">
+                <p>Enter the number of posts and railings you have and the system will calculate the maximum length of fence you can build.</p>
+                <div class="form-input-section">
+                    <div class="side-by-side-label-input">
+                        <label for="posts_available_input">Posts available:</label>
+                        <input type="number" id="posts_available_input" name="posts_available_input">
+                    </div>
+                    <div class="side-by-side-label-input">
+                        <label for="railings_available_input">Railings available:</label>
+                        <input type="number" id="railings_available_input" name="railings_available_input">
+                    </div>
                 </div>
-                <div class="side-by-side-label-input">
-                    <label for="railings_available_input">Railings available:</label>
-                    <input type="number" id="railings_available_input" name="railings_available_input">
-                </div>
+
                 <input class="form-submit-button" type="submit" value="Calculate">
                 <a href="index.php">Reset</a>
             </form>
